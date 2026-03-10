@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Practice Hub</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-code"></i>
+                <h2>Practice Hub</h2>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </button>
+                <button class="nav-item" data-target="topics">
+                    <i class="fa-solid fa-layer-group"></i> Topics
+                </button>
+                <button class="nav-item" data-target="tracker">
+                    <i class="fa-solid fa-list-check"></i> Tracker
+                </button>
+                <button class="nav-item" data-target="analytics">
+                    <i class="fa-solid fa-fire"></i> Analytics
+                </button>
+            </nav>
+            <div class="theme-toggle">
+                <button id="theme-btn">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User">
+                </div>
+            </header>
+
+            <!-- Sections Container -->
+            <div class="sections-wrapper">
+                
+                <!-- 1. Dashboard Section -->
+                <section id="dashboard" class="page-section active">
+                    <div class="welcome-banner">
+                        <div>
+                            <h2 id="motivational-message">Great job! Keep your streak alive 🔥</h2>
+                            <p>Track your data structures and algorithms practice daily.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-check-double"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Solved</h3>
+                                <p id="dash-total">0 / 0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon streak"><i class="fa-solid fa-fire"></i></div>
+                            <div class="stat-info">
+                                <h3>Current Streak</h3>
+                                <p id="dash-streak">0 Days</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon longest"><i class="fa-solid fa-trophy"></i></div>
+                            <div class="stat-info">
+                                <h3>Longest Streak</h3>
+                                <p id="dash-longest">0 Days</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon today"><i class="fa-solid fa-calendar-day"></i></div>
+                            <div class="stat-info">
+                                <h3>Solved Today</h3>
+                                <p id="dash-today">0 Problems</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="card weekly-progress">
+                            <h3>Overall Progress</h3>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="overall-progress" style="width: 0%;"></div>
+                            </div>
+                            <p id="overall-text">0% Completed</p>
+                        </div>
+                        <div class="card daily-goal">
+                            <h3>Daily Goal (2 Problems)</h3>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar today-bar" id="daily-progress" style="width: 0%;"></div>
+                            </div>
+                            <p id="daily-text">0/2 Solved</p>
+                        </div>
+                    </div>
+
+
+                </section>
+
+                <!-- 2. Topics Section -->
+                <section id="topics" class="page-section">
+                    <div class="filters-bar">
+                        <div class="search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="topic-search" placeholder="Search topics...">
+                        </div>
+                    </div>
+                    
+                    <div class="topics-grid" id="topics-container">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Topics Modal -->
+                    <div class="modal-overlay" id="topic-modal">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h2 id="modal-title">Topic Name</h2>
+                                <button class="close-btn" id="close-modal"><i class="fa-solid fa-times"></i></button>
+                            </div>
+                            <div class="modal-body problem-list" id="modal-problems">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+
+                <!-- 5. Tracker Section -->
+                <section id="tracker" class="page-section">
+                    <div class="tracker-layout">
+                        <div class="task-form-card">
+                            <h3>Add Custom Practiced Problem</h3>
+                            <form id="task-form">
+                                <input type="hidden" id="task-id">
+                                <div class="form-group">
+                                    <label>Problem Name</label>
+                                    <input type="text" id="task-name" required placeholder="e.g., Two Sum">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="half">
+                                        <label>Topic</label>
+                                        <select id="task-topic" required>
+                                            <option value="">Select Topic</option>
+                                            <!-- JS will populate -->
+                                        </select>
+                                    </div>
+                                    <div class="half">
+                                        <label>Difficulty</label>
+                                        <select id="task-difficulty" required>
+                                            <option value="Easy">Easy</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Hard">Hard</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="half">
+                                        <label>Platform</label>
+                                        <select id="task-platform" required>
+                                            <option value="LeetCode">LeetCode</option>
+                                            <option value="HackerRank">HackerRank</option>
+                                            <option value="CodeChef">CodeChef</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="half">
+                                        <label>Date</label>
+                                        <input type="date" id="task-date" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-primary" id="task-submit-btn">Add Task</button>
+                            </form>
+                        </div>
+                        
+                        <div class="tasks-list-card">
+                            <h3>Recent Practice History</h3>
+                            <div class="tasks-container" id="tasks-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. Analytics Section -->
+                <section id="analytics" class="page-section">
+                    <div class="analytics-layout">
+                        <!-- Heatmap -->
+                        <div class="card heatmap-card">
+                            <h3>Activity Heatmap</h3>
+                            <div class="heatmap-container">
+                                <div class="heatmap-grid" id="heatmap">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="heatmap-legend">
+                                <span>Less</span>
+                                <div class="legend-box lvl-0"></div>
+                                <div class="legend-box lvl-1"></div>
+                                <div class="legend-box lvl-2"></div>
+                                <div class="legend-box lvl-3"></div>
+                                <div class="legend-box lvl-4"></div>
+                                <span>More</span>
+                            </div>
+                        </div>
+
+                        <!-- Topic Progress Tracking -->
+                        <div class="card topic-progress-card">
+                            <h3>Topic Progress</h3>
+                            <div class="topic-bars-container" id="topic-progress-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Gamification / Badges -->
+                        <div class="card badges-card">
+                            <h3>Achievements</h3>
+                            <div class="badges-grid" id="badges-container">
+                                <div class="badge locked" id="badge-first">
+                                    <div class="badge-icon"><i class="fa-solid fa-star"></i></div>
+                                    <p>First Blood</p>
+                                    <span>Solve 1 Problem</span>
+                                </div>
+                                <div class="badge locked" id="badge-streak7">
+                                    <div class="badge-icon"><i class="fa-solid fa-fire"></i></div>
+                                    <p>On Fire</p>
+                                    <span>7 Day Streak</span>
+                                </div>
+                                <div class="badge locked" id="badge-streak30">
+                                    <div class="badge-icon"><i class="fa-solid fa-meteor"></i></div>
+                                    <p>Unstoppable</p>
+                                    <span>30 Day Streak</span>
+                                </div>
+                                <div class="badge locked" id="badge-solved50">
+                                    <div class="badge-icon"><i class="fa-solid fa-medal"></i></div>
+                                    <p>Half Century</p>
+                                    <span>50 Solved</span>
+                                </div>
+                                <div class="badge locked" id="badge-master">
+                                    <div class="badge-icon"><i class="fa-solid fa-crown"></i></div>
+                                    <p>Topic Master</p>
+                                    <span>Complete a Topic</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
